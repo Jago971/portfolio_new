@@ -22,7 +22,7 @@ function pointCabinet(event) {
     cabinet.style.transform = `rotateX(${clamp(
       rotateX,
       -45,
-      0
+      -5
     )}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
   }
 }
