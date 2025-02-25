@@ -16,7 +16,7 @@ function pointCabinet(event) {
   } else if (event.type === "deviceorientation") {
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const { gamma, beta } = event;
-    rotateX = -beta + 45;
+    rotateX = clamp(-beta + 45, 0, 45);
     rotateY = gamma;
 
     cabinet.style.transform = `rotateX(${clamp(
