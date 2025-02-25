@@ -4,6 +4,7 @@
 @import url(./layout.css);
 @import url(./cabinet.css);
 @import url(./drawer-overlay.css);
+@import url(./document-overlay.css);
 
 :root {
   --bg: cornflowerblue;
