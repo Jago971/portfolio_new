@@ -35,9 +35,7 @@ export function deviceOrientationPermission() {
     DeviceMotionEvent.requestPermission()
       .then((response) => {
         if (response === "granted") {
-          window.addEventListener("deviceorientation", (event) => {
-            pointCabinet(event);
-          });
+          window.addEventListener("deviceorientation", pointCabinet);
         } else {
           alert("Permission denied. Unable to access device motion data.");
         }
@@ -46,9 +44,7 @@ export function deviceOrientationPermission() {
         console.error("Error requesting permission:", error);
       });
   } else if ("DeviceMotionEvent" in window) {
-    window.addEventListener("deviceorientation", (event) => {
-      pointCabinet(event);
-    });
+    window.addEventListener("deviceorientation", pointCabinet);
   } else {
     // alert("DeviceMotionEvent is not supported on this device or browser.");
     document.addEventListener("mousemove", (event) => {
