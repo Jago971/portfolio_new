@@ -1,0 +1,18 @@
+.profile-pic {
+    height: 50cqh;
+    margin: 0 5cqw;
+    align-self: center;
+    transform: rotate(-5deg);
+}
+
+.tape {
+    position: absolute;
+    height: 35cqh;
+    right: 2.5cqh;
+    top: 12.5cqh;
+}
+
+.svg {
+    width: 100%;
+    filter: invert(1);
+}

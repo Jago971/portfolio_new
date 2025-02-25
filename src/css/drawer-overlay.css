@@ -1,0 +1,128 @@
+#cabinet-drawer-overlay {
+  top: -100%;
+  overflow-y: auto;
+  container-type: size;
+  transition: top 1s ease;
+}
+
+#cabinet-drawer-overlay.open {
+  top: 0;
+}
+
+.drawer-overlay-body {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 50cqw;
+  width: 75cqw;
+  min-height: calc(100% - 50cqw);
+  background-color: rgb(100, 100, 100);
+  border-right: solid 3cqw rgb(160, 160, 160);
+  border-left: solid 3cqw rgb(160, 160, 160);
+  box-shadow: inset 0 0 0 3cqw rgb(70, 70, 70);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.drawer-overlay-front {
+  position: absolute;
+  bottom: -43cqw;
+  height: 70cqw;
+  width: 80cqw;
+  left: -5.5cqw;
+  transform: rotateX(-50deg);
+  transform-origin: bottom;
+  background-color: rgb(125, 125, 125);
+  border-top: solid 5cqw rgb(175, 175, 175);
+  border-left: solid 1.5cqw rgb(100, 100, 100);
+  border-right: solid 1.5cqw rgb(100, 100, 100);
+  box-shadow: inset 0 -35cqw 35cqw rgba(0, 0, 0, 0.5);
+}
+
+.drawer-overlay-front:hover {
+  cursor: pointer;
+}
+
+.drawer-overlay-body .folder {
+  position: relative;
+  width: 90%;
+  left: 5%;
+  background-color: beige;
+  border-radius: 2cqw 2cqw 0 0;
+  min-height: 30cqw;
+  filter: drop-shadow(0 0 1cqw);
+}
+
+.drawer-overlay-body .folder .front {
+  position: relative;
+  bottom: -2cqw;
+
+  width: 100%;
+  height: 10cqw;
+
+  background-color: beige;
+  border-radius: 0 2cqw 0 0;
+  filter: drop-shadow(0 0 0.5cqw);
+}
+
+.drawer-overlay-body .folder .tag {
+  position: absolute;
+  top: -7.5cqw;
+
+  min-width: 25cqw;
+  max-width: 80%;
+  height: fit-content;
+  padding: 1.5cqw 1.5cqw 0 1.5cqw;
+
+  background-color: beige;
+  border-radius: 2cqw 2cqw 0 0;
+}
+
+.drawer-overlay-body .folder .label {
+  min-width: 23cqw;
+  width: fit-content;
+  height: fit-content;
+  padding: 0 1cqw;
+  margin: 0;
+
+  background-color: white;
+  border: solid 1px rgb(214, 214, 214);
+  border-radius: 1cqw;
+}
+
+.drawer-overlay-body .documents-container {
+  min-height: 25cqw;
+  height: fit-content;
+  padding: 3cqw 0 17.5cqw 0;
+  perspective: 1000px;
+}
+
+.drawer-overlay-body .document {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  margin-bottom: 5cqw;
+  transform-style: preserve-3d;
+}
+
+.drawer-overlay-body .document p {
+  padding: 2cqw;
+  position: absolute;
+  width: calc(80% - 5cqw);
+  left: 10%;
+  background-color: white;
+  aspect-ratio: 1 / 1.441;
+  filter: drop-shadow(0 0 0.5cqw);
+  transform: rotateX(-30deg);
+  transition: transform 0.1s ease;
+}
+
+.drawer-overlay-body .document:hover {
+  cursor: pointer;
+}
+
+.drawer-overlay-body .document:hover ~ .document p{
+  transform: rotateX(-30deg) translateY(5cqw);
+}
+

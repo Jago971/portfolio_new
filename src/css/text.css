@@ -1,0 +1,299 @@
+:root {
+  --line-height: (100cqh / 12);
+  --h1-size: 3;
+  --h1-span-size: 3.5;
+  --p-size: 1.3;
+}
+
+h1 {
+  display: block;
+  margin: 0;
+  line-height: calc(var(--line-height) * var(--h1-size));
+  font-size: calc(var(--line-height) * var(--h1-size));
+  font-family: cabin sketch;
+
+  > span {
+    line-height: calc(var(--line-height));
+    font-size: calc(var(--line-height) * var(--h1-span-size));
+  }
+
+  .name {
+    color: rgb(0, 128, 128);
+  }
+
+  .job {
+    color: rgb(128, 0, 128);
+  }
+}
+
+.content > h1:first-of-type {
+  margin-top: calc(-1.5 * var(--line-height));
+}
+
+.document p {
+  display: block;
+  margin: 0;
+  line-height: calc(var(--line-height) * 2);
+  font-size: calc(var(--line-height) * var(--p-size));
+  font-family: indie flower;
+}
+
+.content p span {
+  display: inline-block;
+  border-radius: 1.5cqw;
+  transition: transform 0.1s ease-in-out;
+}
+
+.content p:first-of-type {
+  margin-top: calc(-0.4 * var(--line-height));
+}
+
+.basic {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(255, 105, 180, 0.5) 15%,
+    rgb(255, 105, 180) 85%,
+    transparent 95%
+  );
+}
+
+.javascript {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(247, 223, 30, 0.5) 15%,
+    rgb(247, 223, 30) 85%,
+    transparent 95%
+  );
+}
+
+.react {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(97, 218, 251, 0.5) 15%,
+    rgb(97, 218, 251, 1) 85%,
+    transparent 95%
+  );
+}
+
+.vite {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(138, 43, 226, 0.5) 15%,
+    rgb(138, 43, 226, 0.6) 85%,
+    transparent 95%
+  );
+}
+
+.node {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(143, 197, 62, 0.5) 15%,
+    rgb(143, 197, 62, 0.75) 85%,
+    transparent 95%
+  );
+}
+
+.express {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(112, 128, 144, 0.5) 15%,
+    rgb(112, 128, 144, 0.6) 85%,
+    transparent 95%
+  );
+}
+
+.mariadb {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(31, 102, 171, 0.5) 15%,
+    rgb(31, 102, 171, 0.75) 85%,
+    transparent 95%
+  );
+}
+
+.php {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(79, 93, 149, 0.5) 15%,
+    rgb(79, 93, 149, 0.75) 85%,
+    transparent 95%
+  );
+}
+
+.slim {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(170, 200, 123, 0.5) 15%,
+    rgb(170, 200, 123) 85%,
+    transparent 95%
+  );
+}
+
+.mongodb {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(85, 158, 106, 0.5) 15%,
+    rgb(85, 158, 106) 85%,
+    transparent 95%
+  );
+}
+
+.jest {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(157, 52, 53, 0.6) 15%,
+    rgb(157, 52, 53, 0.75) 85%,
+    transparent 95%
+  );
+}
+
+.phpunit {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(99, 93, 174, 0.5) 15%,
+    rgb(99, 93, 174, 0.75) 85%,
+    transparent 95%
+  );
+}
+
+.linkedin {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(0, 119, 181, 0.5) 15%,
+    rgb(0, 119, 181, 0.75) 85%,
+    transparent 95%
+  );
+}
+
+.github,
+.codepen {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(36, 41, 46, 0.75) 15%,
+    rgb(36, 41, 46) 85%,
+    transparent 95%
+  );
+}
+
+.github::after {
+  content: "GitHub";
+  width: var(--githubWidth, 0%);
+}
+
+.codepen::after {
+  content: "CodePen.";
+  width: var(--codepenWidth, 0%);
+}
+
+.github::after,
+.codepen::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--paper-bg);
+  height: 100%;
+  overflow: hidden;
+  text-decoration: underline dashed;
+}
+
+.github::after {
+  transition: width var(--githubDuration, "0s") ease-in-out;
+}
+
+.codepen::after {
+  transition: width var(--codepenDuration, "0s") ease-in-out;
+}
+
+.codepen,
+.linkedin,
+.github {
+  text-decoration: underline dashed;
+}
+
+.codepen:hover,
+.linkedin:hover,
+.github:hover {
+  transform: scale(1.15);
+}
+
+.no-highlight {
+  background: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:active {
+  color: inherit;
+}
+
+.click-me {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%, -50%) scale(1, -1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: font-size 0.1s ease, transform 0.1s ease;
+}
+
+.click-me:hover {
+  cursor: pointer;
+  font-size: calc(var(--line-height) * 4);
+  transform: translate(-50%, -47.5%) scale(1, -1);
+}
+
+.below {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .below {
+    display: inline-block;
+  }
+}
+
+.cabinet-drawer .label {
+  font-size: 15cqw;
+}
+
+.drawer-overlay-body .folder .label {
+  font-size: 7.5cqw;
+  line-height: 1;
+  text-wrap: wrap;
+  align-content: center;
+}
+
+.drawer-overlay-body .document-text {
+  font-family: cabin sketch;
+  font-weight: bold;
+  line-height: 1;
+  font-size: 7.5cqw;
+}

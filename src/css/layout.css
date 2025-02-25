@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+}
+
+.wrapper {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y proximity;
+}
+
+section {
+  position: absolute;
+  height: 100%;
+  width: 33.33%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  transition: opacity 0.5s linear;
+}
+
+#paper-2 {
+  margin-left: 66.66%;
+}
+
+#cabinet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 33.33%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
+#document-overlay {
+  right: 0%;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    width: 100%;
+  }
+
+  section:not(.overlay) {
+    position: relative;
+    left: 0;
+  }
+
+  #paper-2 {
+    margin: 0;
+  }
+
+  #cabinet {
+    margin-left: 0;
+  }
+
+  .overlay {
+    width: 100%;
+  }
+}

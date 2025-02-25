@@ -1,0 +1,50 @@
+@import url(./document.css);
+@import url(./images.css);
+@import url(./animation.css);
+@import url(./layout.css);
+@import url(./cabinet.css);
+@import url(./drawer-overlay.css);
+
+:root {
+  --bg: cornflowerblue;
+  --paper-bg: rgb(252, 252, 248);
+  --paper-margin: rgba(182, 95, 95, 0.8);
+  --paper-lines: rgb(156, 152, 167);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: rgb(25, 25, 55);
+    --paper-bg: rgb(255, 250, 200);
+    --paper-margin: rgba(255, 180, 180, 0.6);
+    --paper-lines: rgb(218, 215, 228);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hidden {
+  display: none
+}
+
+.fade {
+  opacity: 0;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}

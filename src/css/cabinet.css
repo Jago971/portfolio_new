@@ -1,0 +1,211 @@
+.cabinet-body {
+  position: relative;
+  container-type: size;
+  width: 12.5vw;
+  height: 35.4125vw;
+  transform-style: preserve-3d;
+  perspective: 5000px;
+}
+
+.cabinet-body > .shadow {
+  position: absolute;
+  height: 100cqw;
+  width: 100cqw;
+  transform: translateY(calc(100cqh - 50cqw)) rotateX(90deg);
+  box-shadow: 0 0 20cqw 10cqw rgba(0, 0, 0, 0.75);
+}
+
+@media screen and (max-width: 768px) {
+  .cabinet-body {
+    perspective: 6000px;
+    width: 30vw;
+    height: 85vw;
+  }
+}
+
+.cabinet-body > .top {
+  position: absolute;
+  height: 100cqw;
+  width: 100cqw;
+  transform: translateY(-50%) rotateX(90deg);
+  background-color: rgb(120, 120, 120);
+}
+
+.cabinet-body > .face {
+  position: absolute;
+  height: 100cqh;
+  width: 100cqw;
+}
+.cabinet-body > .front {
+  transform: translateZ(50cqw);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transform-style: preserve-3d;
+  background-color: rgb(130, 130, 130);
+}
+
+.cabinet-body > .left {
+  transform: translateX(-50cqw) rotateY(90deg);
+}
+
+.cabinet-body > .right {
+  transform: translateX(50cqw) rotateY(90deg);
+  z-index: 5;
+}
+
+.cabinet-body > .left,
+.cabinet-body > .right {
+  background-color: rgb(110, 110, 110);
+  box-shadow: inset -50cqw -25cqw 50cqw 0cqw rgba(0, 0, 0, 0.15);
+}
+
+.cabinet-drawer {
+  container-type: size;
+  position: relative;
+  width: 83cqw;
+  height: 83cqw;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.front > .shadow {
+  position: absolute;
+  width: 74.7cqw;
+  height: 81cqw;
+  background-color: black;
+  box-shadow: 0 0 1cqw rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.5s ease, transform 0.5s linear;
+}
+
+.front > .shadow.open {
+  transform: translateZ(1px);
+  box-shadow: 0 50cqw 3cqw rgba(0, 0, 0, 0.5);
+}
+
+.front > .shadow:nth-of-type(1) {
+  top: 9.5cqw;
+}
+
+.front > .shadow:nth-of-type(3) {
+  bottom: 9.5cqw;
+}
+
+.bottom-drawer-shadow {
+  height: 100%;
+  width: 74.7cqw;
+  margin: 0 auto;
+  transition: box-shadow 0.5s ease, transform 0.5s linear;
+  box-shadow: 0 0 1cqw rgba(0, 0, 0, 0.5);
+}
+
+.bottom-drawer-shadow.open {
+  box-shadow: 0 74.7cqw 3cqw rgba(0, 0, 0, 0.5);
+}
+
+.cabinet-drawer > .face {
+  position: absolute;
+  height: 80cqh;
+  width: 100cqw;
+  background-color: rgb(75, 75, 75);
+}
+
+.cabinet-drawer > .front {
+  position: absolute;
+  height: 100cqh;
+  width: 100cqw;
+  background-color: rgb(125, 125, 125);
+  border-top: solid 2cqw rgb(175, 175, 175);
+  border-left: solid 2cqw rgb(100, 100, 100);
+  border-right: solid 2cqw rgb(100, 100, 100);
+}
+
+.cabinet-drawer > .front:hover {
+  cursor: pointer;
+}
+
+.cabinet-drawer > .right {
+  transform: translate(45cqw, 20cqh) translateZ(-50cqw) rotateY(90deg);
+}
+
+.cabinet-drawer > .left {
+  transform: translate(-45cqw, 20cqh) translateZ(-50cqw) rotateY(90deg);
+}
+
+.cabinet-drawer > .bottom {
+  height: 100cqh;
+  width: 90cqw;
+  transform: translate(5cqw, 50cqh) translateZ(-50cqw) rotateX(90deg);
+  background-color: rgb(75, 75, 75);
+}
+
+.cabinet-drawer > .left::after,
+.cabinet-drawer > .right::after {
+  content: "";
+  position: absolute;
+  top: 35%;
+  height: 30%;
+  width: 100%;
+  border-top: solid 2.5cqw rgb(90, 90, 90);
+  border-bottom: solid 5cqw rgb(60, 60, 60);
+}
+
+.cabinet-drawer.open {
+  transform: translateZ(83cqw);
+}
+
+.cabinet-drawer .label, .drawer-overlay-front .label {
+  height: 30%;
+  width: 80%;
+  background-color: white;
+  border: solid 1.5cqw rgb(60, 60, 60);
+  border-radius: 1cqw;
+  transition: transform 0.25s ease;
+  font-size: 11cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.handle {
+  width: 50%;
+  height: 10%;
+  background: linear-gradient(
+    to right,
+    #5a5a5a,
+    #9c9c9c,
+    #d9d9d9 20%,
+    #d9d9d9 80%,
+    #9c9c9c,
+    #5a5a5a
+  );
+  border: solid 1px black;
+  box-shadow: 0 3cqw 3cqw rgba(0, 0, 0, 0.5), inset 0 1cqw 2cqw white;
+}
+
+.cabinet-drawer .paper {
+  transform-style: preserve-3d;
+  position: absolute;
+  left: 6%;
+  bottom: 0;
+  height: 95%;
+  width: 88%;
+  background-color: white;
+}
+
+.cabinet-drawer .paper .folder {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(216, 197, 89);
+  transform-origin: bottom;
+}
+
+.cabinet-drawer .paper .folder:nth-of-type(1) {
+  background-color: rgb(216, 197, 89);
+}
+
+.cabinet-drawer .paper .folder:nth-of-type(2) {
+  background-color: rgb(204, 184, 70);
+}
