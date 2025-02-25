@@ -3,6 +3,8 @@ function pointCabinet(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
   let rotateX = 0;
   let rotateY = 0;
 
@@ -14,15 +16,14 @@ function pointCabinet(event) {
       22.5 * rotateX * -1 - 7.5
     }deg) rotateY(${90 * rotateY - 45}deg)`;
   } else if (event.type === "deviceorientation") {
-    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const { gamma, beta } = event;
-    rotateX = -beta;
+    rotateX = -beta - 45;
     rotateY = gamma;
 
     cabinet.style.transform = `rotateX(${clamp(
       rotateX,
       -45,
-      -5
+      0
     )}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
   }
 }
