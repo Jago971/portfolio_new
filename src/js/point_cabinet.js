@@ -47,9 +47,6 @@ export function deviceOrientationPermission() {
   } else if ("DeviceMotionEvent" in window) {
     window.addEventListener("deviceorientation", pointCabinet);
   } else {
-    // alert("DeviceMotionEvent is not supported on this device or browser.");
-    document.addEventListener("mousemove", (event) => {
-      pointCabinet(event);
-    });
+    window.addEventListener("mousemove", pointCabinet);
   }
 }
