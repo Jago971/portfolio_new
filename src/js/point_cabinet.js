@@ -17,7 +17,7 @@ function pointCabinet(event) {
     }deg) rotateY(${90 * rotateY - 45}deg)`;
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
-    rotateX = -beta - 45;
+    rotateX = -beta + 45;
     rotateY = gamma;
 
     cabinet.style.transform = `rotateX(${clamp(
