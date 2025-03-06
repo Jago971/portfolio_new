@@ -2,6 +2,7 @@ import { applyLabel, loadFolders } from "./content.js";
 import { contentObject } from "./files.js";
 
 let selectedDrawer = "unselected";
+let selectedDoc = "unselected";
 let documents;
 const drawerOverlay = document.querySelector("#cabinet-drawer-overlay");
 const documentOverlay = document.querySelector("#document-overlay");
@@ -12,7 +13,7 @@ const shadows = document.querySelectorAll(
   ".front .shadow:not(:last-of-type), .bottom-drawer-shadow"
 );
 
-export function openDrawer(fixedDocument, drawers, index) {
+export function openDrawer(section1, section2, drawers, index) {
   function removeOpenAll() {
     drawers.forEach((drawer) => {
       drawer.classList.remove("open");
@@ -30,29 +31,29 @@ export function openDrawer(fixedDocument, drawers, index) {
   if (selectedDrawer === "unselected") {
     selectedDrawer = index;
     addOpen(index);
-    fixedDocument.classList.toggle("fade");
+    section1.classList.toggle("fade");
     setTimeout(() => {
-      toggleDrawerOverlay(index);
+      toggleDrawerOverlay(index, section2);
     }, 250);
   } else if (selectedDrawer === index) {
     selectedDrawer = "unselected";
-    toggleDrawerOverlay(index);
+    toggleDrawerOverlay(index, section2);
     setTimeout(() => {
       removeOpenAll();
-      fixedDocument.classList.toggle("fade");
+      section1.classList.toggle("fade");
     }, 500);
   } else {
-    toggleDrawerOverlay(index);
+    toggleDrawerOverlay(index, section2);
     removeOpenAll();
     setTimeout(() => {
       selectedDrawer = index;
       addOpen(index);
-      toggleDrawerOverlay(index);
+      toggleDrawerOverlay(index, section2);
     }, 1000);
   }
 }
 
-function toggleDrawerOverlay(index) {
+function toggleDrawerOverlay(index, section2) {
   const content = contentObject[Object.keys(contentObject)[index]];
   const isOpen = drawerOverlay.classList.contains("open");
   const currentLabel = Object.keys(contentObject)[index].toUpperCase();
@@ -71,21 +72,45 @@ function toggleDrawerOverlay(index) {
       documents = drawerBody.querySelectorAll(".document");
       documents.forEach((doc) => {
         doc.addEventListener("click", () => {
-          handleDocumentClick(doc);
+          openDocument(section2, doc.textContent);
         });
       });
     });
   } else {
     documents.forEach((doc) => {
-      doc.removeEventListener("click", handleDocumentClick);
+      doc.removeEventListener("click", openDocument);
       console.log("removed eventlistener");
     });
     drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
     drawerOverlay.classList.remove("open");
+    selectedDoc = "unselected";
+    documentOverlay.classList.remove("open");
+    setTimeout(() => {
+      section2.classList.remove("fade");
+    }, 500);
   }
 }
 
-function handleDocumentClick(doc) {
-  console.log("clicked", doc.textContent);
-  documentOverlay.classList.add("open");
+export function openDocument(section2, doc) {
+  if (selectedDoc === "unselected") {
+    selectedDoc = doc;
+    section2.classList.toggle("fade");
+    setTimeout(() => {
+      documentOverlay.classList.add("open");
+    }, 250);
+  } else if (selectedDoc === doc) {
+    selectedDoc = "unselected";
+    documentOverlay.classList.remove("open");
+    setTimeout(() => {
+      section2.classList.toggle("fade");
+    }, 500);
+  } else {
+    documentOverlay.classList.remove("open");
+    setTimeout(() => {
+      selectedDoc = doc;
+      documentOverlay.classList.add("open");
+      console.log(selectedDoc);
+    }, 1000);
+  }
+  console.log(selectedDoc);
 }

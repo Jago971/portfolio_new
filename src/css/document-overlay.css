@@ -1,7 +1,8 @@
 #document-overlay {
     top: -100%;
+    transition: top 1s ease
 }
 
-#cabinet-drawer-overlay.open {
+#document-overlay.open {
     top: 0%
   }

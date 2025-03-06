@@ -38,7 +38,7 @@ clickMeBtns.forEach((btn, index) => {
 
 drawerFronts.forEach((front, index) => {
   front.addEventListener("click", () => {
-    openDrawer(sections[0], drawers, index)
+    openDrawer(sections[0], sections[1], drawers, index)
   })
 });
 
@@ -51,5 +51,5 @@ drawers.forEach(drawer => {
 });
 
 drawerOverlayFront.addEventListener("click", () => {
-    openDrawer(sections[0], drawers, Number(drawerOverlayFront.dataset.index))
+    openDrawer(sections[0], sections[1], drawers, Number(drawerOverlayFront.dataset.index))
 })
