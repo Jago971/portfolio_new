@@ -17,31 +17,21 @@ export function applyLabel(parent, content) {
 
 export function loadFolders(parent, content) {
   return new Promise((resolve) => {
-    
-    const fragment = document.createDocumentFragment();
     const folders = parent.querySelectorAll(".folder");
     folders.forEach((folder) => folder.remove());
-    
+
     Object.keys(content).forEach((key) => {
-      const newFolder = document.createElement('div');
-      newFolder.innerHTML = newFolderElement;
-      
-      const label = newFolder.querySelector(".label");
-      const documentsContainer = newFolder.querySelector(".documents-container");
-      
+      parent.insertAdjacentHTML("afterbegin", newFolderElement);
+      const label = parent.firstElementChild.querySelector(".label");
+      const documentsContainer = parent.querySelector(".documents-container");
       label.textContent = key;
       loadDocuments(documentsContainer, content[key]);
-
-      fragment.insertBefore(newFolder, fragment.firstChild);
     });
-
-    parent.insertBefore(fragment, parent.firstChild);
-
-    parent.offsetHeight;
 
     resolve();
   });
 }
+
 
 
 

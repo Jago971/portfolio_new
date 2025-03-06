@@ -2,11 +2,11 @@
   top: -100%;
   overflow-y: auto;
   container-type: size;
-  transition: transform 0.75s ease
+  transition: top 1s ease
 }
 
 #cabinet-drawer-overlay.open {
-  transform: translateY(100%);
+  top: 0%
 }
 
 .drawer-overlay-body {
