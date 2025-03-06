@@ -2,11 +2,11 @@
   top: -100%;
   overflow-y: auto;
   container-type: size;
-  transition: top 1s ease;
+  transition: transform 0.75s ease
 }
 
 #cabinet-drawer-overlay.open {
-  top: 0;
+  transform: translateY(100%);
 }
 
 .drawer-overlay-body {
@@ -122,7 +122,6 @@
   cursor: pointer;
 }
 
-.drawer-overlay-body .document:hover ~ .document p{
+.drawer-overlay-body .document:hover ~ .document p {
   transform: rotateX(-30deg) translateY(5cqw);
 }
-

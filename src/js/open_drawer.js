@@ -2,12 +2,15 @@ import { applyLabel, loadFolders } from "./content.js";
 import { contentObject } from "./files.js";
 
 let selectedDrawer = "unselected";
+const drawerOverlay = document.querySelector("#cabinet-drawer-overlay");
+const drawerBody = drawerOverlay.querySelector(".drawer-overlay-body");
+const drawerLabel = drawerOverlay.querySelector(".drawer-overlay-front .label");
+const drawerFront = drawerOverlay.querySelector(".drawer-overlay-front");
+const shadows = document.querySelectorAll(
+  ".front .shadow:not(:last-of-type), .bottom-drawer-shadow"
+);
 
 export function openDrawer(fixedDocument, drawers, index) {
-  const shadows = document.querySelectorAll(
-    ".front .shadow:not(:last-of-type), .bottom-drawer-shadow"
-  );
-
   function removeOpenAll() {
     drawers.forEach((drawer) => {
       drawer.classList.remove("open");
@@ -48,22 +51,29 @@ export function openDrawer(fixedDocument, drawers, index) {
 }
 
 function toggleDrawerOverlay(index) {
-  const drawerOverlay = document.querySelector("#cabinet-drawer-overlay");
-  const drawerBody = drawerOverlay.querySelector(".drawer-overlay-body");
-  const drawerLabel = drawerOverlay.querySelector(
-    ".drawer-overlay-front .label"
-  );
-  const drawerFront = drawerOverlay.querySelector(".drawer-overlay-front");
   const content = contentObject[Object.keys(contentObject)[index]];
-  const isOpen = drawerOverlay.classList.toggle("open");
+  const isOpen = drawerOverlay.classList.contains("open");
+  if(!isOpen) {
+    applyLabel(drawerLabel, Object.keys(contentObject)[index].toUpperCase());
+    drawerFront.setAttribute("data-index", index);
+    loadFolders(drawerBody, content).then(() => {
+        drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
+        requestAnimationFrame(() => {
+          drawerOverlay.classList.add("open");
+        });
+    })
+  } else {
+    drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
+    drawerOverlay.classList.remove("open")
+  }
+  // loadFolders(drawerBody, content);
 
-  setTimeout(
-    () => {
-      applyLabel(drawerLabel, Object.keys(contentObject)[index].toUpperCase());
-      loadFolders(drawerBody, content);
-      drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
-      drawerFront.setAttribute("data-index", index);
-    },
-    isOpen ? 0 : 750
-  );
+  // setTimeout(
+  //   () => {
+  //     applyLabel(drawerLabel, Object.keys(contentObject)[index].toUpperCase());
+  //     drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
+  //     drawerFront.setAttribute("data-index", index);
+  //   },
+  //   isOpen ? 10 : 750
+  // );
 }
