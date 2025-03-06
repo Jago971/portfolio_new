@@ -2,7 +2,7 @@ import { drawWritingLines } from "./lines.js";
 import { drawHighlights } from "./highlighter.js";
 import { unfold } from "./unfold.js";
 import { deviceOrientationPermission } from "./point_cabinet.js"
-import { openDrawer } from "./open_drawer.js";
+import { openDrawer } from "./cabinet_ui.js";
 import { applyLabel } from "./content.js";
 import { contentObject } from "./files.js";
 import { add3dFolders } from "./3dDrawerFolders.js";

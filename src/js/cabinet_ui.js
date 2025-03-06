@@ -79,7 +79,6 @@ function toggleDrawerOverlay(index, section2) {
   } else {
     documents.forEach((doc) => {
       doc.removeEventListener("click", openDocument);
-      console.log("removed eventlistener");
     });
     drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
     drawerOverlay.classList.remove("open");
@@ -91,7 +90,7 @@ function toggleDrawerOverlay(index, section2) {
   }
 }
 
-export function openDocument(section2, doc) {
+function openDocument(section2, doc) {
   if (selectedDoc === "unselected") {
     selectedDoc = doc;
     section2.classList.toggle("fade");
@@ -109,8 +108,6 @@ export function openDocument(section2, doc) {
     setTimeout(() => {
       selectedDoc = doc;
       documentOverlay.classList.add("open");
-      console.log(selectedDoc);
     }, 1000);
   }
-  console.log(selectedDoc);
 }
