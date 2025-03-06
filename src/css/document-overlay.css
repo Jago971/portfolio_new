@@ -1,3 +1,7 @@
 #document-overlay {
     top: -100%;
 }
+
+#cabinet-drawer-overlay.open {
+    top: 0%
+  }

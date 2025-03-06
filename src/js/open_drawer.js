@@ -2,7 +2,9 @@ import { applyLabel, loadFolders } from "./content.js";
 import { contentObject } from "./files.js";
 
 let selectedDrawer = "unselected";
+let documents;
 const drawerOverlay = document.querySelector("#cabinet-drawer-overlay");
+const documentOverlay = document.querySelector("#document-overlay");
 const drawerBody = drawerOverlay.querySelector(".drawer-overlay-body");
 const drawerLabel = drawerOverlay.querySelector(".drawer-overlay-front .label");
 const drawerFront = drawerOverlay.querySelector(".drawer-overlay-front");
@@ -53,27 +55,37 @@ export function openDrawer(fixedDocument, drawers, index) {
 function toggleDrawerOverlay(index) {
   const content = contentObject[Object.keys(contentObject)[index]];
   const isOpen = drawerOverlay.classList.contains("open");
-  if(!isOpen) {
-    applyLabel(drawerLabel, Object.keys(contentObject)[index].toUpperCase());
-    drawerFront.setAttribute("data-index", index);
-    loadFolders(drawerBody, content).then(() => {
-        drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
-        requestAnimationFrame(() => {
-          drawerOverlay.classList.add("open");
-        });
-    })
-  } else {
-    drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
-    drawerOverlay.classList.remove("open")
-  }
-  // loadFolders(drawerBody, content);
+  const currentLabel = Object.keys(contentObject)[index].toUpperCase();
 
-  // setTimeout(
-  //   () => {
-  //     applyLabel(drawerLabel, Object.keys(contentObject)[index].toUpperCase());
-  //     drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
-  //     drawerFront.setAttribute("data-index", index);
-  //   },
-  //   isOpen ? 10 : 750
-  // );
+  if (!isOpen) {
+    drawerFront.setAttribute("data-index", index);
+    applyLabel(drawerLabel, currentLabel);
+
+    loadFolders(drawerBody, content).then(() => {
+      drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
+
+      requestAnimationFrame(() => {
+        drawerOverlay.classList.add("open");
+      });
+
+      documents = drawerBody.querySelectorAll(".document");
+      documents.forEach((doc) => {
+        doc.addEventListener("click", () => {
+          handleDocumentClick(doc);
+        });
+      });
+    });
+  } else {
+    documents.forEach((doc) => {
+      doc.removeEventListener("click", handleDocumentClick);
+      console.log("removed eventlistener");
+    });
+    drawerOverlay.scrollTop = drawerOverlay.scrollHeight;
+    drawerOverlay.classList.remove("open");
+  }
+}
+
+function handleDocumentClick(doc) {
+  console.log("clicked", doc.textContent);
+  documentOverlay.classList.add("open");
 }

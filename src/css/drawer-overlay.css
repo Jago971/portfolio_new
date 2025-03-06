@@ -37,7 +37,7 @@
   border-top: solid 5cqw rgb(175, 175, 175);
   border-left: solid 1.5cqw rgb(100, 100, 100);
   border-right: solid 1.5cqw rgb(100, 100, 100);
-  box-shadow: inset 0 -35cqw 35cqw rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 -35cqw 35cqw rgba(0, 0, 0, 0.25);
 }
 
 .drawer-overlay-front:hover {
@@ -94,7 +94,7 @@
 .drawer-overlay-body .documents-container {
   min-height: 25cqw;
   height: fit-content;
-  padding: 3cqw 0 17.5cqw 0;
+  padding: 3cqw 0 15cqw 0;
   perspective: 1000px;
 }
 
@@ -102,7 +102,7 @@
   position: relative;
   background-color: white;
   width: 100%;
-  margin-bottom: 5cqw;
+  margin-bottom: 8cqw;
   transform-style: preserve-3d;
 }
 
