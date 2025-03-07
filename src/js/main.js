@@ -65,9 +65,6 @@ function initializeEventListeners() {
   });
 
   function handleFirstInteraction() {
-    sections.forEach((section) => {
-      section.style.backgroundColor = "green";
-    });
     deviceOrientationPermission();
     window.removeEventListener("click", handleFirstInteraction);
     window.removeEventListener("touchstart", handleFirstInteraction);
@@ -78,9 +75,6 @@ function initializeEventListeners() {
     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   if (isIOS) {
-    sections.forEach((section) => {
-      section.style.backgroundColor = "red";
-    });
     window.addEventListener("click", handleFirstInteraction);
     window.addEventListener("touchstart", handleFirstInteraction);
   } else {

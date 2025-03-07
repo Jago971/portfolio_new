@@ -67,6 +67,7 @@
   width: 83cqw;
   height: 83cqw;
   transform-style: preserve-3d;
+  z-index: 2;
   transition: transform 0.5s ease;
 }
 
