@@ -58,10 +58,25 @@ function initializeEventListeners() {
       drawWritingLines(document);
     });
   });
+
+  function handleFirstInteraction() {
+    deviceOrientationPermission();
+    window.removeEventListener("click", handleFirstInteraction);
+    window.removeEventListener("touchstart", handleFirstInteraction);
+  }
+
+  // Check if the device is iOS
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (isIOS) {
+    window.addEventListener("click", handleFirstInteraction);
+    window.addEventListener("touchstart", handleFirstInteraction);
+  } else {
+    deviceOrientationPermission();
+  }
 }
 
 function initialize() {
-  deviceOrientationPermission();
   initializeDocuments();
   initializeClickMeButtons();
   initializeDrawers();
