@@ -40,27 +40,32 @@ export function deviceOrientationPermission() {
       DeviceOrientationEvent.requestPermission()
         .then((response) => {
           if (response === "granted") {
-            window.addEventListener("deviceorientation", (event) => {
-              pointCabinet(event);
-            });
+            window.addEventListener("deviceorientation", pointCabinet);
+            document.body.insertAdjacentHTML('beforeend', '<p>Permission granted</p>'); // Visual indicator
           } else {
             alert("Permission denied. Unable to access device orientation data.");
+            document.body.insertAdjacentHTML('beforeend', '<p>Permission denied</p>'); // Visual indicator
           }
         })
         .catch((error) => {
           console.error("Error requesting permission:", error);
+          document.body.insertAdjacentHTML('beforeend', `<p>Error: ${error.message}</p>`); // Visual indicator
         });
       console.log("ios");
     } else {
+      // Fallback for other browsers on iOS that do not support requestPermission
       window.addEventListener("deviceorientation", pointCabinet);
       console.log("ios fallback");
+      document.body.insertAdjacentHTML('beforeend', '<p>iOS fallback</p>'); // Visual indicator
     }
   } else if (isAndroid && "DeviceOrientationEvent" in window) {
     window.addEventListener("deviceorientation", pointCabinet);
     console.log("android");
+    document.body.insertAdjacentHTML('beforeend', '<p>Android device detected</p>'); // Visual indicator
   } else {
     window.addEventListener("mousemove", pointCabinet);
     console.log("desktop");
+    document.body.insertAdjacentHTML('beforeend', '<p>Desktop device detected</p>'); // Visual indicator
   }
 }
 
