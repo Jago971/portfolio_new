@@ -44,12 +44,12 @@ export function deviceOrientationPermission() {
       .catch((error) => {
         console.error("Error requesting permission:", error);
       });
-      console.log("ios")
-  } else if ("DeviceOrientationEvent" in window) {
+    console.log("ios");
+  } else if ("DeviceOrientationEvent" in window && !/Macintosh/.test(navigator.userAgent)) {
     window.addEventListener("deviceorientation", pointCabinet);
-    console.log("android")
+    console.log("android");
   } else {
     window.addEventListener("mousemove", pointCabinet);
-    console.log("desktop")
+    console.log("desktop");
   }
 }
