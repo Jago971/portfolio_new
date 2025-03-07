@@ -28,7 +28,7 @@ function pointCabinet(event) {
   }
 }
 
-export function deviceOrientationPermission() {
+export function deviceOrientationPermission(callback) {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   const isAndroid = /Android/.test(navigator.userAgent);
 
@@ -41,57 +41,24 @@ export function deviceOrientationPermission() {
         .then((response) => {
           if (response === "granted") {
             window.addEventListener("deviceorientation", pointCabinet);
-            document.body.insertAdjacentHTML('beforeend', '<p>Permission granted</p>'); // Visual indicator
+            if (callback) callback();
           } else {
             alert("Permission denied. Unable to access device orientation data.");
-            document.body.insertAdjacentHTML('beforeend', '<p>Permission denied</p>'); // Visual indicator
           }
         })
         .catch((error) => {
-          console.error("Error requesting permission:", error);
-          document.body.insertAdjacentHTML('beforeend', `<p>Error: ${error.message}</p>`); // Visual indicator
+          alert(`Error requesting permission: ${error.message}`);
         });
-      console.log("ios");
     } else {
       // Fallback for other browsers on iOS that do not support requestPermission
       window.addEventListener("deviceorientation", pointCabinet);
-      console.log("ios fallback");
-      document.body.insertAdjacentHTML('beforeend', '<p>iOS fallback</p>'); // Visual indicator
+      if (callback) callback();
     }
   } else if (isAndroid && "DeviceOrientationEvent" in window) {
     window.addEventListener("deviceorientation", pointCabinet);
-    console.log("android");
-    document.body.insertAdjacentHTML('beforeend', '<p>Android device detected</p>'); // Visual indicator
+    if (callback) callback();
   } else {
     window.addEventListener("mousemove", pointCabinet);
-    console.log("desktop");
-    document.body.insertAdjacentHTML('beforeend', '<p>Desktop device detected</p>'); // Visual indicator
-  }
-}
-
-function permission() {
-  if (
-    typeof DeviceMotionEvent !== "undefined" &&
-    typeof DeviceMotionEvent.requestPermission === "function"
-  ) {
-    DeviceMotionEvent.requestPermission()
-      .then((response) => {
-        if (response === "granted") {
-          window.addEventListener("deviceorientation", (event) => {
-            pointCabinet(event);
-          });
-        } else {
-          alert("Permission denied. Unable to access device motion data.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error requesting permission:", error);
-      });
-  } else if ("DeviceMotionEvent" in window) {
-    window.addEventListener("deviceorientation", (event) => {
-      pointCabinet(event);
-    });
-  } else {
-    alert("DeviceMotionEvent is not supported on this device or browser.");
+    if (callback) callback();
   }
 }
