@@ -48,12 +48,7 @@ function initializeDrawers() {
   });
 
   drawerOverlayFront.addEventListener("click", () => {
-    openDrawer(
-      sections[0],
-      sections[1],
-      drawers,
-      Number(drawerOverlayFront.dataset.index)
-    );
+    openDrawer(sections[0], sections[1], drawers, Number(drawerOverlayFront.dataset.index));
   });
 }
 
@@ -67,38 +62,38 @@ function initializeEventListeners() {
   function handleFirstInteraction() {
     document.body.insertAdjacentHTML('beforeend', '<p>touch detected</p>'); // Visual indicator
     deviceOrientationPermission();
-    window.removeEventListener("click", handleFirstInteraction);
-    window.removeEventListener("touchstart", handleFirstInteraction);
+    document.removeEventListener("click", handleFirstInteraction);
+    document.removeEventListener("touchstart", handleFirstInteraction);
   }
 
   // Improved iOS detection function
   function iOS() {
-    return (
-      [
-        "iPad Simulator",
-        "iPhone Simulator",
-        "iPod Simulator",
-        "iPad",
-        "iPhone",
-        "iPod",
-      ].includes(navigator.platform) ||
-      // iPad on iOS 13 detection
-      (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-    );
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
   }
 
   const isIOS = iOS();
+  document.body.insertAdjacentHTML('beforeend', `<p>isIOS: ${isIOS}</p>`); // Visual indicator
 
   if (isIOS) {
-    window.addEventListener("click", handleFirstInteraction);
-    window.addEventListener("touchstart", handleFirstInteraction);
+    document.body.insertAdjacentHTML('beforeend', '<p>iOS device detected</p>'); // Visual indicator
+    document.addEventListener("click", handleFirstInteraction);
+    document.addEventListener("touchstart", handleFirstInteraction);
   } else {
+    document.body.insertAdjacentHTML('beforeend', '<p>Non-iOS device detected</p>'); // Visual indicator
     deviceOrientationPermission();
   }
 }
 
 function initialize() {
-  // deviceOrientationPermission();
   initializeDocuments();
   initializeClickMeButtons();
   initializeDrawers();
