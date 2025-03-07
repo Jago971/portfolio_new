@@ -59,12 +59,11 @@ function initializeEventListeners() {
     });
   });
 
-  // function handleFirstInteraction() {
-  //   document.body.insertAdjacentHTML('beforeend', '<p>touch detected</p>'); // Visual indicator
-  //   deviceOrientationPermission();
-  //   document.removeEventListener("click", handleFirstInteraction);
-  //   document.removeEventListener("touchstart", handleFirstInteraction);
-  // }
+  function handleFirstInteraction() {
+    deviceOrientationPermission();
+    document.removeEventListener("click", handleFirstInteraction);
+    document.removeEventListener("touchend", handleFirstInteraction);
+  }
 
   // Improved iOS detection function
   function iOS() {
@@ -81,14 +80,11 @@ function initializeEventListeners() {
   }
 
   const isIOS = iOS();
-  document.body.insertAdjacentHTML('beforeend', `<p>isIOS: ${isIOS}</p>`); // Visual indicator
 
   if (isIOS) {
-    document.body.insertAdjacentHTML('beforeend', '<p>iOS device detected</p>'); // Visual indicator
-    document.addEventListener("click", deviceOrientationPermission);
-    document.addEventListener("touchend", deviceOrientationPermission);
+    document.addEventListener("click", handleFirstInteraction);
+    document.addEventListener("touchend", handleFirstInteraction);
   } else {
-    document.body.insertAdjacentHTML('beforeend', '<p>Non-iOS device detected</p>'); // Visual indicator
     deviceOrientationPermission();
   }
 }
