@@ -49,6 +49,9 @@ export function deviceOrientationPermission() {
           console.error("Error requesting permission:", error);
         });
       console.log("ios");
+    } else {
+      window.addEventListener("deviceorientation", pointCabinet);
+      console.log("ios fallback");
     }
   } else if (isAndroid && "DeviceOrientationEvent" in window) {
     window.addEventListener("deviceorientation", pointCabinet);
