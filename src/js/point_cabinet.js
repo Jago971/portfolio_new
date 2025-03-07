@@ -30,7 +30,6 @@ function pointCabinet(event) {
 
 export function deviceOrientationPermission() {
   if (
-    typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
   ) {
     DeviceOrientationEvent.requestPermission()
