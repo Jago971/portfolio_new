@@ -1,34 +1,3 @@
-// export function drawHighlights(document, includesBlacks = false) {
-// //   let increment = 0;
-// //   const below = document.querySelector(".below");
-// //   const highlights = document.querySelectorAll("p span");
-
-// //   if (below) {
-// //     if (window.innerWidth > 768) {
-// //       below.style.display = "none";
-// //     } else {
-// //       below.style.display = "initial";
-// //     }
-// //   }
-
-// //   highlights.forEach((element, index) => {
-// //     if (window.innerWidth > 768 && element.classList.contains("below")) {
-// //       increment = 1;
-// //       return;
-// //     }
-// //     element.style.backgroundRepeat = "no-repeat";
-// //     element.style.backgroundSize = "0% 100%";
-// //     element.style.animation = "fillGradient 0.5s ease forwards";
-// //     element.classList.remove("no-highlight");
-// //     element.style.animationDelay = `${(index - increment) * 0.5}s`;
-// //     if (includesBlacks && (index === 11 || index === 12)) {
-// //       setTimeout(() => {
-// //         element.style.setProperty(`--width${index - 10}`, "100%");
-// //       }, (index - increment) * 500);
-// //     }
-// //   });
-// }
-
 function countCharacters(string) {
   return string.length;
 }

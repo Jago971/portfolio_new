@@ -13,44 +13,18 @@ const shadows = document.querySelectorAll(
   ".front .shadow:not(:last-of-type), .bottom-drawer-shadow"
 );
 
-export function openDrawer(section1, section2, drawers, index) {
-  function removeOpenAll() {
-    drawers.forEach((drawer) => {
-      drawer.classList.remove("open");
-    });
-    shadows.forEach((shadow) => {
-      shadow.classList.remove("open");
-    });
-  }
+function removeOpenAll(drawers) {
+  drawers.forEach((drawer) => {
+    drawer.classList.remove("open");
+  });
+  shadows.forEach((shadow) => {
+    shadow.classList.remove("open");
+  });
+}
 
-  function addOpen(index) {
-    drawers[index].classList.add("open");
-    shadows[index].classList.add("open");
-  }
-
-  if (selectedDrawer === "unselected") {
-    selectedDrawer = index;
-    addOpen(index);
-    section1.classList.toggle("fade");
-    setTimeout(() => {
-      toggleDrawerOverlay(index, section2);
-    }, 250);
-  } else if (selectedDrawer === index) {
-    selectedDrawer = "unselected";
-    toggleDrawerOverlay(index, section2);
-    setTimeout(() => {
-      removeOpenAll();
-      section1.classList.toggle("fade");
-    }, 500);
-  } else {
-    toggleDrawerOverlay(index, section2);
-    removeOpenAll();
-    setTimeout(() => {
-      selectedDrawer = index;
-      addOpen(index);
-      toggleDrawerOverlay(index, section2);
-    }, 1000);
-  }
+function addOpen(drawers, index) {
+  drawers[index].classList.add("open");
+  shadows[index].classList.add("open");
 }
 
 function toggleDrawerOverlay(index, section2) {
@@ -87,6 +61,32 @@ function toggleDrawerOverlay(index, section2) {
     setTimeout(() => {
       section2.classList.remove("fade");
     }, 500);
+  }
+}
+
+export function openDrawer(section1, section2, drawers, index) {
+  if (selectedDrawer === "unselected") {
+    selectedDrawer = index;
+    addOpen(drawers, index);
+    section1.classList.toggle("fade");
+    setTimeout(() => {
+      toggleDrawerOverlay(index, section2);
+    }, 250);
+  } else if (selectedDrawer === index) {
+    selectedDrawer = "unselected";
+    toggleDrawerOverlay(index, section2);
+    setTimeout(() => {
+      removeOpenAll(drawers);
+      section1.classList.toggle("fade");
+    }, 500);
+  } else {
+    toggleDrawerOverlay(index, section2);
+    removeOpenAll(drawers);
+    setTimeout(() => {
+      selectedDrawer = index;
+      addOpen(drawers, index);
+      toggleDrawerOverlay(index, section2);
+    }, 1000);
   }
 }
 
