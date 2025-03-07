@@ -75,6 +75,9 @@ function initializeEventListeners() {
     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   if (isIOS) {
+    clickMeBtns.forEach(btn => {
+      btn.style.color = "red";
+    });
     window.addEventListener("click", handleFirstInteraction);
     window.addEventListener("touchstart", handleFirstInteraction);
   } else {
