@@ -48,7 +48,12 @@ function initializeDrawers() {
   });
 
   drawerOverlayFront.addEventListener("click", () => {
-    openDrawer(sections[0], sections[1], drawers, Number(drawerOverlayFront.dataset.index));
+    openDrawer(
+      sections[0],
+      sections[1],
+      drawers,
+      Number(drawerOverlayFront.dataset.index)
+    );
   });
 }
 
@@ -59,25 +64,32 @@ function initializeEventListeners() {
     });
   });
 
-  // function handleFirstInteraction() {
-  //   deviceOrientationPermission();
-  //   window.removeEventListener("click", handleFirstInteraction);
-  //   window.removeEventListener("touchstart", handleFirstInteraction);
-  // }
+  function handleFirstInteraction() {
+    sections.forEach((section) => {
+      section.style.backgroundColor = "green";
+    });
+    deviceOrientationPermission();
+    window.removeEventListener("click", handleFirstInteraction);
+    window.removeEventListener("touchstart", handleFirstInteraction);
+  }
 
-  // // Check if the device is iOS
-  // const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // Check if the device is iOS
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  // if (isIOS) {
-  //   window.addEventListener("click", handleFirstInteraction);
-  //   window.addEventListener("touchstart", handleFirstInteraction);
-  // } else {
-  //   deviceOrientationPermission();
-  // }
+  if (isIOS) {
+    sections.forEach((section) => {
+      section.style.backgroundColor = "red";
+    });
+    window.addEventListener("click", handleFirstInteraction);
+    window.addEventListener("touchstart", handleFirstInteraction);
+  } else {
+    deviceOrientationPermission();
+  }
 }
 
 function initialize() {
-  deviceOrientationPermission();
+  // deviceOrientationPermission();
   initializeDocuments();
   initializeClickMeButtons();
   initializeDrawers();
