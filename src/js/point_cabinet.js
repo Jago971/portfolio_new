@@ -29,23 +29,28 @@ function pointCabinet(event) {
 }
 
 export function deviceOrientationPermission() {
-  if (
-    typeof DeviceOrientationEvent !== "undefined" &&
-    typeof DeviceOrientationEvent.requestPermission === "function"
-  ) {
-    DeviceOrientationEvent.requestPermission()
-      .then((response) => {
-        if (response === "granted") {
-          window.addEventListener("deviceorientation", pointCabinet);
-        } else {
-          alert("Permission denied. Unable to access device orientation data.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error requesting permission:", error);
-      });
-    console.log("ios");
-  } else if ("DeviceOrientationEvent" in window && !/Macintosh/.test(navigator.userAgent)) {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(navigator.userAgent);
+
+  if (isIOS) {
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function"
+    ) {
+      DeviceOrientationEvent.requestPermission()
+        .then((response) => {
+          if (response === "granted") {
+            window.addEventListener("deviceorientation", pointCabinet);
+          } else {
+            alert("Permission denied. Unable to access device orientation data.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error requesting permission:", error);
+        });
+      console.log("ios");
+    }
+  } else if (isAndroid && "DeviceOrientationEvent" in window) {
     window.addEventListener("deviceorientation", pointCabinet);
     console.log("android");
   } else {
