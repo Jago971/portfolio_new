@@ -71,16 +71,19 @@ function initializeEventListeners() {
   }
 
   // Check if the device is iOS
-  const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  document.body.insertAdjacentHTML('beforeend', `<p>isIOS: ${isIOS}</p>`); // Visual indicator
 
   if (isIOS) {
+    document.body.insertAdjacentHTML('beforeend', '<p>iOS device detected</p>'); // Visual indicator
     clickMeBtns.forEach(btn => {
       btn.style.color = "red";
+      btn.textContent = "iOS detected"; // Visual indicator
     });
     window.addEventListener("click", handleFirstInteraction);
     window.addEventListener("touchstart", handleFirstInteraction);
   } else {
+    document.body.insertAdjacentHTML('beforeend', '<p>Non-iOS device detected</p>'); // Visual indicator
     deviceOrientationPermission();
   }
 }
